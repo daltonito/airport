@@ -13,8 +13,21 @@
 	</definition>
 	
 	<!-- Welcome view -->
-	<definition name="home" extends="defaultLayout">
+	<definition name="WELCOME_VIEW" extends="defaultLayout">
 		<put-attribute name="title" value="Welcome" />
 		<put-attribute name="body" value="/WEB-INF/jsp/views/welcome.jsp" />
 	</definition>
+	
+	<!-- Query view -->
+	<definition name="QUERY_VIEW" extends="defaultLayout">
+		<put-attribute name="title" value="Query" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/query.jsp" />
+	</definition>
+	
+	<!-- Reports view -->
+	<definition name="REPORTS_VIEW" extends="defaultLayout">
+		<put-attribute name="title" value="Reports" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/reports.jsp" />
+	</definition>
+		
 </tiles-definitions>
