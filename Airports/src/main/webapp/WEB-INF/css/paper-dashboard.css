@@ -1409,9 +1409,9 @@ textarea.form-control {
   z-index: 3;
 }
 .navbar .navbar-brand {
-  font-weight: 600;
+  font-weight: normal;
   margin: 5px 0px;
-  padding: 20px 15px;
+  padding: 22px 15px;
   font-size: 20px;
 }
 .navbar .navbar-nav > li > a {
