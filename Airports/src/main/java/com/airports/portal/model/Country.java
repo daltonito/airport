@@ -1,11 +1,12 @@
 package com.airports.portal.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.airports.portal.model.core.BaseDocument;
+
 @Document(collection = "countries")
-public class Country {
+public class Country extends BaseDocument {
 	
 	private String id;
 	private String code;
@@ -14,7 +15,7 @@ public class Country {
 	private String wikipediaLink;
 	private String keywords;
 	
-	@Id
+	@Field("id")
 	public String getId() {
 		return id;
 	}
@@ -23,6 +24,7 @@ public class Country {
 		this.id = id;
 	}
 	
+	@Field("code")
 	public String getCode() {
 		return code;
 	}
@@ -31,6 +33,7 @@ public class Country {
 		this.code = code;
 	}
 	
+	@Field("name")
 	public String getName() {
 		return name;
 	}
@@ -39,6 +42,7 @@ public class Country {
 		this.name = name;
 	}
 	
+	@Field("continent")
 	public String getContinent() {
 		return continent;
 	}
@@ -56,6 +60,7 @@ public class Country {
 		this.wikipediaLink = wikipediaLink;
 	}
 	
+	@Field("keywords")
 	public String getKeywords() {
 		return keywords;
 	}

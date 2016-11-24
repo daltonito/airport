@@ -27,6 +27,8 @@
 		<constructor-arg name="databaseName" value="test" />
 	</bean>
 	
+	<context:component-scan base-package="com.airports.portal.repository.custom.impl"/>
+	<context:component-scan base-package="com.airports.portal.service.impl" />
 	<mongo:repositories base-package="com.airports.portal.repository" mongo-template-ref="mongoTemplate"/>
 		
 </beans>	

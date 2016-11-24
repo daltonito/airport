@@ -1,11 +1,12 @@
 package com.airports.portal.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.airports.portal.model.core.BaseDocument;
+
 @Document(collection = "airports")
-public class Airport {
+public class Airport extends BaseDocument {
 	
 	private String id;
 	private String ident;
@@ -26,7 +27,7 @@ public class Airport {
 	private String wikipediaLink;
 	private String keywords;
 	
-	@Id
+	@Field("id")
 	public String getId() {
 		return id;
 	}
@@ -35,6 +36,7 @@ public class Airport {
 		this.id = id;
 	}
 	
+	@Field("ident")
 	public String getIdent() {
 		return ident;
 	}
@@ -43,6 +45,7 @@ public class Airport {
 		this.ident = ident;
 	}
 	
+	@Field("type")
 	public String getType() {
 		return type;
 	}
@@ -51,6 +54,7 @@ public class Airport {
 		this.type = type;
 	}
 	
+	@Field("name")
 	public String getName() {
 		return name;
 	}
@@ -86,6 +90,7 @@ public class Airport {
 		this.elevationFt = elevationFt;
 	}
 	
+	@Field("continent")
 	public String getContinent() {
 		return continent;
 	}
@@ -112,6 +117,7 @@ public class Airport {
 		this.isoRegion = isoRegion;
 	}
 	
+	@Field("municipality")
 	public String getMunicipality() {
 		return municipality;
 	}
@@ -174,6 +180,7 @@ public class Airport {
 		this.wikipediaLink = wikipediaLink;
 	}
 	
+	@Field("keywords")
 	public String getKeywords() {
 		return keywords;
 	}

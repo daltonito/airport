@@ -6,4 +6,5 @@ import com.airports.portal.model.Country;
 
 public interface CountryRepository extends MongoRepository<Country, String> {
 
+	Country findByCodeOrNameLikeAllIgnoreCase(String code, String name);
 }
