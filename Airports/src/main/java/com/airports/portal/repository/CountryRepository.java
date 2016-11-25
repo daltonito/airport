@@ -1,10 +1,11 @@
 package com.airports.portal.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 import com.airports.portal.model.Country;
+import com.airports.portal.repository.core.BaseRepository;
 
-public interface CountryRepository extends MongoRepository<Country, String> {
+public interface CountryRepository extends BaseRepository<Country, String> {
 
-	Country findByCodeOrNameLikeAllIgnoreCase(String code, String name);
+	Country findByCodeIgnoreCase(String countryCode);
+	
+	Country findByNameLikeIgnoreCase(String countryName);
 }

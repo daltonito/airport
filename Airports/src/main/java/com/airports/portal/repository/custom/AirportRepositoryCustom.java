@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface AirportRepositoryCustom {
 
-	Map<Integer, String> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder);
+	Map<String, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder);
 	
 	List<String> getAirportIdentsByCountry(String countryCode);
 }

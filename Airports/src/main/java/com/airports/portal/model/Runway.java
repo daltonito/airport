@@ -8,7 +8,7 @@ import com.airports.portal.model.core.BaseDocument;
 @Document(collection = "runways")
 public class Runway extends BaseDocument {
 
-	private String id;
+	private Long id;
 	private String airportRef;
 	private String airportIdent;
 	private String lengthFt;
@@ -30,11 +30,11 @@ public class Runway extends BaseDocument {
 	private String heDisplacedThresholdFt;
 	
 	@Field("id")
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

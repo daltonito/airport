@@ -7,10 +7,10 @@ public interface AirportService {
 	
 	void getAirportsAndRunwaysByCountry(String countryInput);
 	
-	Map<Integer, String> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder);
+	Map<String, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder);
 
 	List<String> getRunwayTypesByCountry(String countryCode);
 	
-	List<String> getMostCommonRunwayIdents(Integer numberOfRecords);
+	Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords);
 	
 }

@@ -28,8 +28,15 @@ public class AirportServiceImpl implements AirportService {
 	
 	@Override
 	public void getAirportsAndRunwaysByCountry(String countryInput) {
+		
+		Country country = null;
+		
+		if (countryInput.length() == 2) {
+			country = countryRepository.findByCodeIgnoreCase(countryInput);
+		} else if (countryInput.length() > 2) {
+			country = countryRepository.findByNameLikeIgnoreCase(countryInput);
+		}
     	
-    	Country country = countryRepository.findByCodeOrNameLikeAllIgnoreCase(countryInput, countryInput);
     	System.out.println("Entered country name: " + country.getName());
     	
     	List<Airport> airports = airportRepository.findByIsoCountry(country.getCode());
@@ -46,7 +53,7 @@ public class AirportServiceImpl implements AirportService {
     }
 	
 	@Override
-	public Map<Integer, String> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder) {
+	public Map<String, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder) {
 		return airportRepository.getAirportsCountByCountry(numberOfRecords, descendingOrder);
 	}
 
@@ -59,7 +66,7 @@ public class AirportServiceImpl implements AirportService {
 	}
 
 	@Override
-	public List<String> getMostCommonRunwayIdents(Integer numberOfRecords) {
+	public Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords) {
 		return runwayRepository.getMostCommonRunwayIdents(numberOfRecords);
 	}
 
