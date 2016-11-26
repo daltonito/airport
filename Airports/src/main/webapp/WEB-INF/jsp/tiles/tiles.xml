@@ -7,10 +7,12 @@
 	<definition name="defaultLayout" template="/WEB-INF/jsp/tiles/layouts/defaultLayout.jsp">
 		<put-attribute name="title" value=""/>
 		<put-attribute name="header" value="/WEB-INF/jsp/tiles/sections/defaultHeader.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/tiles/sections/defaultMenu.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/jsp/tiles/sections/defaultFooter.jsp" />
 	</definition>
+	
+	<!-- Menu bar -->
+	<definition name="menu" template="/WEB-INF/jsp/tiles/sections/defaultMenu.jsp" />
 	
 	<!-- Welcome view -->
 	<definition name="WELCOME_VIEW" extends="defaultLayout">

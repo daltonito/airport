@@ -3,6 +3,7 @@ package com.airports.portal.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import com.airports.portal.service.AirportService;
 @Service
 public class AirportServiceImpl implements AirportService {
 	
+	private static final Logger LOGGER = Logger.getLogger(AirportServiceImpl.class);
+	
 	@Autowired
 	AirportRepository airportRepository;
 	
@@ -27,7 +30,7 @@ public class AirportServiceImpl implements AirportService {
 	RunwayRepository runwayRepository;
 	
 	@Override
-	public void getAirportsAndRunwaysByCountry(String countryInput) {
+	public Country getAirportsAndRunwaysByCountry(String countryInput) {
 		
 		Country country = null;
 		
@@ -36,20 +39,23 @@ public class AirportServiceImpl implements AirportService {
 		} else if (countryInput.length() > 2) {
 			country = countryRepository.findByNameLikeIgnoreCase(countryInput);
 		}
+		
+		if (country == null)
+			return null;
     	
-    	System.out.println("Entered country name: " + country.getName());
-    	
+		LOGGER.debug("Country found: " + country.getName());
     	List<Airport> airports = airportRepository.findByIsoCountry(country.getCode());
     	
     	for (Airport airport : airports) {
-    		System.out.println("Airport: " + airport.getName() + " - " + airport.getIdent());
     		
+    		LOGGER.debug("Airport found: " + airport.getName() + " - " + airport.getIdent());
     		List<Runway> airportRunways = runwayRepository.findByAirportIdent(airport.getIdent());
-    		
-    		for (Runway runway : airportRunways) {
-    			System.out.println("Runway: " + runway.getAirportIdent() + " - " + runway.getSurface());
-    		}
+    		airport.setRunways(airportRunways);
     	}
+    	
+    	country.setAirports(airports);
+    	
+    	return country;
     }
 	
 	@Override

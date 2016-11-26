@@ -1,5 +1,9 @@
 package com.airports.portal.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -26,6 +30,9 @@ public class Airport extends BaseDocument {
 	private String homeLink;
 	private String wikipediaLink;
 	private String keywords;
+	
+	private List<Runway> runways = new ArrayList<>();
+	
 	
 	@Field("id")
 	public Long getId() {
@@ -187,5 +194,14 @@ public class Airport extends BaseDocument {
 	
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
+	}
+
+	@Transient
+	public List<Runway> getRunways() {
+		return runways;
+	}
+
+	public void setRunways(List<Runway> runways) {
+		this.runways = runways;
 	}
 }

@@ -7,46 +7,51 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+
 		
 		<title><tiles:getAsString name="title" /></title>
 		
-		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    	<meta name="viewport" content="width=device-width" />
-    	
-		<link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" />
-		<link href="<c:url value='/css/animate.min.css' />" rel="stylesheet" />
-		<link href="<c:url value='/css/paper-dashboard.css' />" rel="stylesheet" />
-		<link href="<c:url value='/css/themify-icons.css' />" rel="stylesheet" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<link rel="shortcut icon" href="<c:url value='/img/gt_favicon.png' />" />
+		<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
+		<link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css' />" /> 
+		<link rel="stylesheet" href="<c:url value='/css/font-awesome.min.css' />" />
+	
+		<!-- Custom styles for template -->
+		<link rel="stylesheet" href="<c:url value='/css/bootstrap-theme.css' />" media="screen" />
+		<link rel="stylesheet" href="<c:url value='/css/main.css' />" />
 	
 	    <!--  Fonts and icons     -->
 	    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet" />
-	    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css' />
-	
-		<script src="<c:url value="/js/paper-dashboard.js" />"></script>
-		<script src="<c:url value="/js/bootstrap-checkbox-radio.js" />"></script>
-		<script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
-		<script src="<c:url value="/js/bootstrap.min.js" />"></script>
+	    
+	    
+<!-- 				<script src="https://maps.google.com/maps/api/js?libraries=geometry&key=AIzaSyDXdvm0FPWMumIBPVkeuIvHBpl5xSxntog">
+		</script> -->
+		<!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" />
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" />
+		<script src="<c:url value="/js/headroom.min.js" />" />
+		<script src="<c:url value="/js/jQuery.headroom.min.js" />" />
+		<script src="<c:url value="/js/template.js" />" />
+		<%-- <script src="<c:url value="/js/maplace.min.js" />" /> --%>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		
 	</head>
 	<body>
-		<div class="wrapper">
-			<div class="sidebar" data-background-color="white" data-active-color="danger">
-				<div class="sidebar-wrapper">
-					<tiles:insertAttribute name="menu" />
-				</div>
-			</div>
-			<div class="main-panel">
-				<nav class="navbar navbar-default">
-					<tiles:insertAttribute name="header" />
-				</nav>
-				<div class="content">
-					<tiles:insertAttribute name="body" />
-				</div>
-			</div>
-			<footer class="footer">
-				<tiles:insertAttribute name="footer" />
-			</footer>
+		<tiles:insertAttribute name="header" />
+		<div class="container">
+			<tiles:insertAttribute name="body" />
 		</div>
+		<footer id="footer" class="footer">
+			<tiles:insertAttribute name="footer" />
+		</footer>
 	</body>
 </html>
