@@ -5,11 +5,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.airports.portal.model.Airport;
 import com.airports.portal.model.Country;
 import com.airports.portal.model.Runway;
+import com.airports.portal.model.support.AirportPaginationHelper;
 import com.airports.portal.repository.AirportRepository;
 import com.airports.portal.repository.CountryRepository;
 import com.airports.portal.repository.RunwayRepository;
@@ -30,7 +34,7 @@ public class AirportServiceImpl implements AirportService {
 	RunwayRepository runwayRepository;
 	
 	@Override
-	public Country getAirportsAndRunwaysByCountry(String countryInput) {
+	public AirportPaginationHelper getAirportsAndRunwaysByCountry(String countryInput, Integer pageNumber) {
 		
 		Country country = null;
 		
@@ -42,20 +46,22 @@ public class AirportServiceImpl implements AirportService {
 		
 		if (country == null)
 			return null;
-    	
+		
 		LOGGER.debug("Country found: " + country.getName());
-    	List<Airport> airports = airportRepository.findByIsoCountry(country.getCode());
+
+		PageRequest request = new PageRequest(pageNumber - 1, 50, Sort.Direction.ASC, "name");
+		Page<Airport> airportsPage = airportRepository.findByIsoCountry(country.getCode(), request);
     	
-    	for (Airport airport : airports) {
+    	for (Airport airport : airportsPage) {
     		
     		LOGGER.debug("Airport found: " + airport.getName() + " - " + airport.getIdent());
     		List<Runway> airportRunways = runwayRepository.findByAirportIdent(airport.getIdent());
     		airport.setRunways(airportRunways);
     	}
     	
-    	country.setAirports(airports);
+//    	country.setAirports(airports);
     	
-    	return country;
+    	return new AirportPaginationHelper(country, airportsPage);
     }
 	
 	@Override
@@ -75,5 +81,4 @@ public class AirportServiceImpl implements AirportService {
 	public Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords) {
 		return runwayRepository.getMostCommonRunwayIdents(numberOfRecords);
 	}
-
 }

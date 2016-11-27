@@ -26,16 +26,13 @@
 	    <!--  Fonts and icons     -->
 	    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet" />
 	    
-	    
-<!-- 				<script src="https://maps.google.com/maps/api/js?libraries=geometry&key=AIzaSyDXdvm0FPWMumIBPVkeuIvHBpl5xSxntog">
-		</script> -->
 		<!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" />
 		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" />
 		<script src="<c:url value="/js/headroom.min.js" />" />
 		<script src="<c:url value="/js/jQuery.headroom.min.js" />" />
 		<script src="<c:url value="/js/template.js" />" />
-		<%-- <script src="<c:url value="/js/maplace.min.js" />" /> --%>
+
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 		<!-- jQuery library -->

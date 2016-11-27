@@ -3,11 +3,11 @@ package com.airports.portal.service;
 import java.util.List;
 import java.util.Map;
 
-import com.airports.portal.model.Country;
+import com.airports.portal.model.support.AirportPaginationHelper;
 
 public interface AirportService {
 	
-	Country getAirportsAndRunwaysByCountry(String countryInput);
+	AirportPaginationHelper getAirportsAndRunwaysByCountry(String countryInput, Integer pageNumber);
 	
 	Map<String, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder);
 

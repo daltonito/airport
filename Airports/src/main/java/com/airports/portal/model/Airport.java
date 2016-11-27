@@ -54,7 +54,7 @@ public class Airport extends BaseDocument {
 	
 	@Field("type")
 	public String getType() {
-		return type;
+		return airportType.valueOf(type).getValue();
 	}
 	
 	public void setType(String type) {
@@ -203,5 +203,27 @@ public class Airport extends BaseDocument {
 
 	public void setRunways(List<Runway> runways) {
 		this.runways = runways;
+	}
+	
+	private enum airportType {
+		
+		small_airport("Small airport"),
+		medium_airport("Medium airport"),
+		large_airport("Large airport"),
+		seaplane_base("Seaplane base"),
+		balloonport("Balloonport"),
+		heliport("Heliport"),
+		closed("Closed");
+		
+		private String value;
+		
+		public String getValue() {
+			return value;
+		}
+		
+		private airportType(String value) {
+			this.value = value;
+		}
+		
 	}
 }
