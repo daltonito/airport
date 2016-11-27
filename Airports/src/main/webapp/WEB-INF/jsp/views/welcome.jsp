@@ -15,7 +15,7 @@
 				</header>
 				<h3>Airport information</h3>
 				<p style="text-align: justify;"><img src='<c:url value="/img/airplane-blue-sky.jpg"/>' alt="" class="img-rounded pull-right" width="300" > Welcome to the International Airports portal, place where you can find information about every airport in the world.  This portal lists all international airports, from basic details to detailed technical information about the airport and the airport's runways. Use the options from the menu to obtain more detailed information.</p>
-				<p style="text-align: justify;">Airports are uniquely represented by their IATA airport code and ICAO airport code. Most airport names include the location. Many airport names honour a public figure, commonly a politician (e.g. Paris-Charles de Gaulle Airport), a celebrity such as in Liverpool John Lennon Airport or a prominent figure in aviation history of the region.</p>
+				<p style="text-align: justify;">Airports are uniquely represented by their IATA airport code and ICAO airport code. Most airport names include the location. Many airport names honour a public figure, commonly a politician (e.g. Paris-Charles de Gaulle Airport), a celebrity such as in Liverpool John Lennon Airport or a prominent figure in aviation history of the region (e.g. Will Rogers World Airport).</p>
 				<h3>Airport structures</h3>
 				<p style="text-align: justify;">Airports are divided into landside and airside areas. Landside areas include parking lots, public transportation train stations and access roads. Airside areas include all areas accessible to aircraft, including runways, taxiways and aprons. Access from landside areas to airside areas is tightly controlled at most airports.</p>
 			</article>
