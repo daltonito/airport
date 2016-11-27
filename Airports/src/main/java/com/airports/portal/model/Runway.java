@@ -1,5 +1,7 @@
 package com.airports.portal.model;
 
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,7 +12,7 @@ public class Runway extends BaseDocument {
 
 	private Long id;
 	private String airportRef;
-	private String airportIdent;
+	@TextIndexed private String airportIdent;
 	private String lengthFt;
 	private String widthFt;
 	private String surface;

@@ -23,13 +23,25 @@
 	<!-- Query view -->
 	<definition name="QUERY_VIEW" extends="defaultLayout">
 		<put-attribute name="title" value="Query" />
-		<put-attribute name="body" value="/WEB-INF/jsp/views/query.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/query/query.jsp" />
 	</definition>
 	
 	<!-- Reports view -->
-	<definition name="REPORTS_VIEW" extends="defaultLayout">
-		<put-attribute name="title" value="Reports" />
-		<put-attribute name="body" value="/WEB-INF/jsp/views/reports.jsp" />
+	<definition name="REPORTS_NUMBER_OF_AIRPORTS_VIEW" extends="defaultLayout">
+		<put-attribute name="title" value="Reports (Number of airports)" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/reports/numberOfAirports.jsp" />
 	</definition>
+	
+	<!-- Reports view -->
+	<definition name="REPORTS_TYPES_OF_RUNWAYS_VIEW" extends="defaultLayout">
+		<put-attribute name="title" value="Reports (Types of runways)" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/reports/runwayТypes.jsp" />
+	</definition>
+	
+	<!-- Reports view -->
+	<definition name="REPORTS_COMMON_RUNWAY_IDENTS_VIEW" extends="defaultLayout">
+		<put-attribute name="title" value="Reports (Most common runway idents)" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/reports/runwayIdents.jsp" />
+	</definition>		
 		
 </tiles-definitions>

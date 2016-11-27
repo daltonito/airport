@@ -1,8 +1,10 @@
 package com.airports.portal.service.impl;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import com.airports.portal.model.Airport;
 import com.airports.portal.model.Country;
 import com.airports.portal.model.Runway;
 import com.airports.portal.model.support.AirportPaginationHelper;
+import com.airports.portal.model.support.RunwayTypesPaginationHelper;
 import com.airports.portal.repository.AirportRepository;
 import com.airports.portal.repository.CountryRepository;
 import com.airports.portal.repository.RunwayRepository;
@@ -59,14 +62,34 @@ public class AirportServiceImpl implements AirportService {
     		airport.setRunways(airportRunways);
     	}
     	
-//    	country.setAirports(airports);
-    	
     	return new AirportPaginationHelper(country, airportsPage);
     }
 	
 	@Override
-	public Map<String, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder) {
-		return airportRepository.getAirportsCountByCountry(numberOfRecords, descendingOrder);
+	public Map<Country, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder) {
+		
+		Map<Country, Integer> results = new LinkedHashMap<Country, Integer>();
+		Map<String, Integer> queryResults = airportRepository.getAirportsCountByCountry(numberOfRecords, descendingOrder);
+		
+		for (String countryCode : queryResults.keySet()) {
+			results.put(countryRepository.findByCodeIgnoreCase(countryCode), queryResults.get(countryCode));
+		}
+		
+		return results;
+	}
+	
+	@Override
+	public RunwayTypesPaginationHelper getRunwayTypesByCountry(Integer pageNumber) {
+		
+		Map<Country, String> results = new LinkedHashMap<Country, String>();
+		PageRequest request = new PageRequest(pageNumber - 1, 50, Sort.Direction.ASC, "name");
+		Page<Country> countryPage = countryRepository.findAll(request);
+		
+		for (Country country : countryPage.getContent()) {
+			results.put(country, StringUtils.join(getRunwayTypesByCountry(country.getCode()), ", "));
+		}
+		
+		return new RunwayTypesPaginationHelper(results, countryPage);
 	}
 
 	@Override
@@ -81,4 +104,5 @@ public class AirportServiceImpl implements AirportService {
 	public Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords) {
 		return runwayRepository.getMostCommonRunwayIdents(numberOfRecords);
 	}
+
 }

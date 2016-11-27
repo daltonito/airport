@@ -74,7 +74,7 @@ img.pull-left { margin-right: 10px; }
 .maincontent { }
 
 /* Sidebars */
-.sidebar { padding-top:36px; padding-bottom:30px; }
+.sidebar { padding-top:100px; padding-bottom:30px; }
 	.sidebar .widget { margin-bottom:20px; }
 	.sidebar h1, .sidebar .h1, .sidebar h2, .sidebar .h2, .sidebar h3, .sidebar .h3 { margin-top:20px; } 
 

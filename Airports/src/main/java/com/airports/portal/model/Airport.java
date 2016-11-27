@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.airports.portal.model.core.BaseDocument;
 
+@CompoundIndex(name = "iso_country_ident_idx", def = "{'isoCountry' : 1, 'ident' : 1}" )
 @Document(collection = "airports")
 public class Airport extends BaseDocument {
 	

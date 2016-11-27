@@ -9,11 +9,11 @@
 <!-- Fixed navbar -->
 <div class="navbar navbar-inverse navbar-fixed-top headroom gradBackground" >
 	<div class="container">
-		<div class="navbar-header" style="width: 30%;">
+		<div class="navbar-header" style="width: 40%;">
 			<!-- Button for smallest screens -->
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-			<span style="COLOR: white; FLOAT: left; padding-top: 1.1em; padding-left: 6em; font-weight: bold; font-family: 'Open sans', Helvetica, Arial;">INTERNATIONAL AIRPORTS PORTAL</span>
-			<a class="navbar-brand" href="index.html" style="margin-left: -14em;"><img style="width: 24%; opacity: 0.86;" src="img/logo.png" alt="Progressus HTML5 template"></a>
+			<span style="COLOR: white; FLOAT: left; font-size: 1.3em; padding-top: 0.7em; padding-left: 4em; font-weight: bold; font-family: 'Open sans', Helvetica, Arial;">INTERNATIONAL AIRPORTS PORTAL</span>
+			<a class="navbar-brand" href="<c:url value='<%=Requests.ROOT%>' />" style="margin-left: -18em;"><img style="width: 24%; opacity: 0.86;" src="<c:url value="/img/logo.png" />" alt=""></a>
 		</div>
 		<tiles:insertDefinition name="menu" />
 	</div>

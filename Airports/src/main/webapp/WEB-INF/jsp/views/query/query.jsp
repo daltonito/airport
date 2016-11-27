@@ -20,7 +20,7 @@
 					<p class="text-center text-muted">Find information and details about airports and runways for specific country</p>
 					<hr>
 					<c:url value="<%=Requests.QUERY%>" var="form_action"></c:url>
-					<form action="${form_action}" method="POST" autocomplete="false">
+					<form action="${form_action}" method="POST" autocomplete="off">
 						<div class="row">
 							<div class="col-lg-12">
 								<label>Country name or code</label>
