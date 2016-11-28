@@ -1,5 +1,9 @@
 package com.airports.portal.view;
 
+/**
+ * Views values used for the screens
+ *
+ */
 public enum Views {
 
 	WELCOME_VIEW,

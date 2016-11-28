@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -36,6 +37,19 @@ public class AirportServiceImpl implements AirportService {
 	@Autowired
 	RunwayRepository runwayRepository;
 	
+	/**
+	 * Defines the number of records shown per page
+	 */
+	private static Integer PAGE_SIZE;
+	
+	@Value("${pagination.page.size:30}")
+	public void setPageSize(Integer pageSize) {
+		PAGE_SIZE = pageSize;
+	} 
+	
+	/* (non-Javadoc)
+	 * @see com.airports.portal.service.AirportService#getAirportsAndRunwaysByCountry(java.lang.String, java.lang.Integer)
+	 */
 	@Override
 	public AirportPaginationHelper getAirportsAndRunwaysByCountry(String countryInput, Integer pageNumber) {
 		
@@ -52,7 +66,7 @@ public class AirportServiceImpl implements AirportService {
 		
 		LOGGER.debug("Country found: " + country.getName());
 
-		PageRequest request = new PageRequest(pageNumber - 1, 50, Sort.Direction.ASC, "name");
+		PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
 		Page<Airport> airportsPage = airportRepository.findByIsoCountry(country.getCode(), request);
     	
     	for (Airport airport : airportsPage) {
@@ -65,6 +79,9 @@ public class AirportServiceImpl implements AirportService {
     	return new AirportPaginationHelper(country, airportsPage);
     }
 	
+	/* (non-Javadoc)
+	 * @see com.airports.portal.service.AirportService#getAirportsCountByCountry(java.lang.Integer, boolean)
+	 */
 	@Override
 	public Map<Country, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder) {
 		
@@ -78,11 +95,14 @@ public class AirportServiceImpl implements AirportService {
 		return results;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.airports.portal.service.AirportService#getRunwayTypesByCountry(java.lang.Integer)
+	 */
 	@Override
 	public RunwayTypesPaginationHelper getRunwayTypesByCountry(Integer pageNumber) {
 		
 		Map<Country, String> results = new LinkedHashMap<Country, String>();
-		PageRequest request = new PageRequest(pageNumber - 1, 50, Sort.Direction.ASC, "name");
+		PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
 		Page<Country> countryPage = countryRepository.findAll(request);
 		
 		for (Country country : countryPage.getContent()) {
@@ -92,6 +112,9 @@ public class AirportServiceImpl implements AirportService {
 		return new RunwayTypesPaginationHelper(results, countryPage);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.airports.portal.service.AirportService#getRunwayTypesByCountry(java.lang.String)
+	 */
 	@Override
 	public List<String> getRunwayTypesByCountry(String countryCode) {
 		
@@ -100,6 +123,9 @@ public class AirportServiceImpl implements AirportService {
 		return distinctSurfaces;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.airports.portal.service.AirportService#getMostCommonRunwayIdents(java.lang.Integer)
+	 */
 	@Override
 	public Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords) {
 		return runwayRepository.getMostCommonRunwayIdents(numberOfRecords);

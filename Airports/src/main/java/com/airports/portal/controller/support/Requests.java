@@ -1,5 +1,8 @@
 package com.airports.portal.controller.support;
 
+/**
+ * Class used for request mapping values, all created requests should be defined here.
+ */
 public final class Requests {
 	
 	public static final String ROOT = "/";

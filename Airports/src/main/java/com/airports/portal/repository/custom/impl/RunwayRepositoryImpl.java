@@ -27,6 +27,9 @@ import com.mongodb.DBObject;
 @Repository
 public class RunwayRepositoryImpl extends BaseRepositoryImpl<Airport, String> implements RunwayRepositoryCustom {
 
+	/* (non-Javadoc)
+	 * @see com.airports.portal.repository.custom.RunwayRepositoryCustom#getDistinctRunwayTypes(java.util.List)
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<String> getDistinctRunwayTypes(List<String> airportIdents) {
@@ -35,6 +38,9 @@ public class RunwayRepositoryImpl extends BaseRepositoryImpl<Airport, String> im
 		return getMongoTemplate().getCollection("runways").distinct("surface", query.getQueryObject());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.airports.portal.repository.custom.RunwayRepositoryCustom#getMostCommonRunwayIdents(java.lang.Integer)
+	 */
 	@Override
 	public Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords) {
 		

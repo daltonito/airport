@@ -6,6 +6,10 @@ import org.springframework.data.domain.Page;
 
 import com.airports.portal.model.Country;
 
+/**
+ * Simple helper class used for transferring the actual data and pagination 
+ * from the service layer to the controller. 
+ */
 public class RunwayTypesPaginationHelper {
 
 	Map<Country, String> countryResults;

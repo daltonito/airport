@@ -3,6 +3,11 @@ package com.airports.portal.model.core;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+/**
+ * Basic document class that should be extended by all documents.
+ * This class should be used for defining common attributes and methods
+ * that would be used by all documents.
+ */
 public abstract class BaseDocument {
 
 	private ObjectId _id;

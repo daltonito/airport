@@ -28,6 +28,9 @@ import com.mongodb.DBObject;
 @Repository
 public class AirportRepositoryImpl extends BaseRepositoryImpl<Airport, String> implements AirportRepositoryCustom {
 
+	/* (non-Javadoc)
+	 * @see com.airports.portal.repository.custom.AirportRepositoryCustom#getAirportsCountByCountry(java.lang.Integer, boolean)
+	 */
 	@Override
 	public Map<String, Integer> getAirportsCountByCountry(Integer numberOfRecords, boolean descendingOrder) {
 		
@@ -49,6 +52,9 @@ public class AirportRepositoryImpl extends BaseRepositoryImpl<Airport, String> i
 		return resultMap;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.airports.portal.repository.custom.AirportRepositoryCustom#getAirportIdentsByCountry(java.lang.String)
+	 */
 	@Override
 	public List<String> getAirportIdentsByCountry(String countryCode) {
 		

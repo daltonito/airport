@@ -14,6 +14,12 @@
 	<!-- Menu bar -->
 	<definition name="menu" template="/WEB-INF/jsp/tiles/sections/defaultMenu.jsp" />
 	
+	<!-- Pagination module -->
+	<definition name="pagination" template="/WEB-INF/jsp/tiles/pagination/pagination.jsp" />
+	
+	<!-- Runway modal -->
+	<definition name="runwayModal" template="/WEB-INF/jsp/views/query/runwayModal.jsp" />
+	
 	<!-- Welcome view -->
 	<definition name="WELCOME_VIEW" extends="defaultLayout">
 		<put-attribute name="title" value="Welcome" />

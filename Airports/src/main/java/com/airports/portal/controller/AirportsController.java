@@ -45,6 +45,7 @@ public class AirportsController extends BaseController {
     	} else {
         	LOGGER.debug("Invalid user input, returning action to the query search screen");
         	model.addAttribute("search_action", true);
+        	model.addAttribute("error_action", true);
     	}
 
         return Views.QUERY_VIEW.name();
@@ -61,21 +62,13 @@ public class AirportsController extends BaseController {
     	AirportPaginationHelper page = airportService.getAirportsAndRunwaysByCountry(queryInput, pageNumber == null ? 1 : pageNumber);
     	
     	if (page != null) {
-        
-	    	int current = page.getAirportsPage().getNumber() + 1;
-	        int begin = Math.max(1, current - 5);
-	        int end = Math.min(begin + 10, page.getAirportsPage().getTotalPages());
-	        
+	        setPaginationParameters(page.getAirportsPage(), model);
 	        model.addAttribute("country", page.getCountry());
-	        model.addAttribute("beginIndex", begin);
-	        model.addAttribute("endIndex", end);
-	        model.addAttribute("currentIndex", current);
-	        model.addAttribute("totalPages", page.getAirportsPage().getTotalPages());
 	    	model.addAttribute("result_action", true);
-	    	
     	} else {
     		LOGGER.debug("Airports not found for country input " + queryInput);
         	model.addAttribute("search_action", true);
+        	model.addAttribute("error_action", true);
     	}
     }
  
@@ -101,16 +94,8 @@ public class AirportsController extends BaseController {
     private void getRunwayTypesByCountry(Integer pageNumber, Model model) {
     	
     	RunwayTypesPaginationHelper page = airportService.getRunwayTypesByCountry(pageNumber == null ? 1 : pageNumber);
-        
-    	int current = page.getCountryPage().getNumber() + 1;
-        int begin = Math.max(1, current - 5);
-        int end = Math.min(begin + 10, page.getCountryPage().getTotalPages());
-        
+    	setPaginationParameters(page.getCountryPage(), model);
         model.addAttribute("countries", page.getCountryResults());
-        model.addAttribute("beginIndex", begin);
-        model.addAttribute("endIndex", end);
-        model.addAttribute("currentIndex", current);
-        model.addAttribute("totalPages", page.getCountryPage().getTotalPages());
     }
     
     @RequestMapping(value = Requests.REPORTS_COMMON_RUNWAY_IDENTS, method = RequestMethod.GET)
