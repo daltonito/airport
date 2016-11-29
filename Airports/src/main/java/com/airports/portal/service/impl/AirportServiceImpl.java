@@ -55,10 +55,23 @@ public class AirportServiceImpl implements AirportService {
 		
 		Country country = null;
 		
+		// search by country code if the input string is with length 2
 		if (countryInput.length() == 2) {
 			country = countryRepository.findByCodeIgnoreCase(countryInput);
+			
+			// search for the exact country name if length is more than 2
 		} else if (countryInput.length() > 2) {
-			country = countryRepository.findByNameLikeIgnoreCase(countryInput);
+			country = countryRepository.findByNameIgnoreCase(countryInput);
+			
+			// search for the country name that begins with the input string
+			if (country == null) {
+				country = countryRepository.findByNameStartsWithIgnoreCase(countryInput);
+			}
+			
+			// search for the country name that is contains the input string
+			if (country == null) {
+				country = countryRepository.findByNameLikeIgnoreCase(countryInput);
+			}
 		}
 		
 		if (country == null)
@@ -89,6 +102,7 @@ public class AirportServiceImpl implements AirportService {
 		Map<String, Integer> queryResults = airportRepository.getAirportsCountByCountry(numberOfRecords, descendingOrder);
 		
 		for (String countryCode : queryResults.keySet()) {
+			LOGGER.debug("Country code: " + countryCode + " / " + queryResults.get(countryCode));
 			results.put(countryRepository.findByCodeIgnoreCase(countryCode), queryResults.get(countryCode));
 		}
 		
@@ -106,7 +120,11 @@ public class AirportServiceImpl implements AirportService {
 		Page<Country> countryPage = countryRepository.findAll(request);
 		
 		for (Country country : countryPage.getContent()) {
-			results.put(country, StringUtils.join(getRunwayTypesByCountry(country.getCode()), ", "));
+			
+			List<String> runwayTypes = getRunwayTypesByCountry(country.getCode());
+			results.put(country, StringUtils.join(runwayTypes, ", "));
+			
+			LOGGER.debug("Country code: " + country.getCode() + " / " + runwayTypes.toString());
 		}
 		
 		return new RunwayTypesPaginationHelper(results, countryPage);
@@ -119,7 +137,11 @@ public class AirportServiceImpl implements AirportService {
 	public List<String> getRunwayTypesByCountry(String countryCode) {
 		
 		List<String> airportIdents = airportRepository.getAirportIdentsByCountry(countryCode);
+		LOGGER.debug("Returned airport identifications: " + airportIdents.toString());
+		
 		List<String> distinctSurfaces = runwayRepository.getDistinctRunwayTypes(airportIdents);
+		LOGGER.debug("Returned distinct surfaces: " + distinctSurfaces.toString());
+		
 		return distinctSurfaces;
 	}
 

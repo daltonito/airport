@@ -20,7 +20,26 @@ public interface CountryRepository extends BaseRepository<Country, String> {
 	
 	/**
 	 * Retrieves all countries for a given country name, 
-	 * by making a LIKE operation (begins with) and ignoring
+	 * by ignoring the case of the letters from the input. 
+	 * 
+	 * @param countryName the input value for the country code
+	 * @return all matching Country documents
+	 */
+	Country findByNameIgnoreCase(String countryName);
+	
+	/**
+	 * Retrieves all countries for a given country name, 
+	 * by making a -starts with- operation and ignoring
+	 * the case of the letters from the input. 
+	 * 
+	 * @param countryName the input value for the country code
+	 * @return all matching Country documents
+	 */
+	Country findByNameStartsWithIgnoreCase(String countryName);
+	
+	/**
+	 * Retrieves all countries for a given country name, 
+	 * by making a LIKE operation and ignoring
 	 * the case of the letters from the input. 
 	 * 
 	 * @param countryName the input value for the country code

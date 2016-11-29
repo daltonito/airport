@@ -120,7 +120,7 @@
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
-												<h4 class="modal-title"><span id="geoLocationModalTitle"></span></h4>
+												<h4 class="modal-title" style="text-align: center;"><span id="geoLocationModalTitle"></span></h4>
 											</div>
 											<div class="modal-body">
 												<div id="map" style="width:100%;height:50%;overflow:visible;"></div>

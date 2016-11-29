@@ -34,7 +34,7 @@ public class RunwayRepositoryImpl extends BaseRepositoryImpl<Airport, String> im
 	@SuppressWarnings("unchecked")
 	public List<String> getDistinctRunwayTypes(List<String> airportIdents) {
 		
-		Query query = new Query(where("airport_ident").in(airportIdents));
+		Query query = new Query(where("airport_ident").in(airportIdents).andOperator(where("surface").ne("")));
 		return getMongoTemplate().getCollection("runways").distinct("surface", query.getQueryObject());
 	}
 

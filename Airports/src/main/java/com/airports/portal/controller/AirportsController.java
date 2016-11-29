@@ -74,6 +74,7 @@ public class AirportsController extends BaseController {
  
     @RequestMapping(value = Requests.REPORTS_NUMBER_OF_AIRPORTS, method = RequestMethod.GET)
     public String handleReportsNumberOfAirports(Model model) {
+    	LOGGER.debug("Reports (Number of airports) is requested");
     	model.addAttribute("topCountries", airportService.getAirportsCountByCountry(10, true));
     	model.addAttribute("bottomCountries", airportService.getAirportsCountByCountry(10, false));
         return Views.REPORTS_NUMBER_OF_AIRPORTS_VIEW.name();
@@ -81,12 +82,14 @@ public class AirportsController extends BaseController {
     
     @RequestMapping(value = Requests.REPORTS_TYPES_OF_RUNWAYS, method = RequestMethod.GET)
     public String handleReportsTypesOfRunways(Model model) {
+    	LOGGER.debug("Reports (Type of runways) is requested");
     	getRunwayTypesByCountry(null, model);
         return Views.REPORTS_TYPES_OF_RUNWAYS_VIEW.name();
     }
     
     @RequestMapping(value = Requests.REPORTS_TYPES_OF_RUNWAYS, method = RequestMethod.POST, params = "pageNumber")
     public String handleReportsTypesOfRunways(Model model, @RequestParam("pageNumber") Integer pageNumber) {
+    	LOGGER.debug("Reports (Type of runways) is requested. Page number " + pageNumber);
     	getRunwayTypesByCountry(pageNumber, model);
         return Views.REPORTS_TYPES_OF_RUNWAYS_VIEW.name();
     }
@@ -100,6 +103,7 @@ public class AirportsController extends BaseController {
     
     @RequestMapping(value = Requests.REPORTS_COMMON_RUNWAY_IDENTS, method = RequestMethod.GET)
     public String handleReportsHighestLowestCount(Model model) {
+    	LOGGER.debug("Reports (Common runway identifications) is requested");
     	model.addAttribute("runwayIdents", airportService.getMostCommonRunwayIdents(10));
         return Views.REPORTS_COMMON_RUNWAY_IDENTS_VIEW.name();
     }
