@@ -16,7 +16,6 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.airports.portal.model.Airport;
 import com.airports.portal.model.Runway;
 import com.airports.portal.repository.custom.RunwayRepositoryCustom;
 import com.airports.portal.repository.custom.impl.core.BaseRepositoryImpl;
@@ -25,7 +24,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 @Repository
-public class RunwayRepositoryImpl extends BaseRepositoryImpl<Airport, String> implements RunwayRepositoryCustom {
+public class RunwayRepositoryImpl extends BaseRepositoryImpl<Runway, String> implements RunwayRepositoryCustom {
 
 	/* (non-Javadoc)
 	 * @see com.airports.portal.repository.custom.RunwayRepositoryCustom#getDistinctRunwayTypes(java.util.List)
