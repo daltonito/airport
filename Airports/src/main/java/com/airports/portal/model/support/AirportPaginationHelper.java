@@ -12,11 +12,13 @@ import com.airports.portal.model.Country;
  */
 public class AirportPaginationHelper {
 	
-	Country country;
-	Page<Airport> airportsPage;
+	private Country country;
+	private Integer totalAirports;
+	private Page<Airport> airportsPage;
 	
-	public AirportPaginationHelper(Country country, Page<Airport> airportsPage) {
+	public AirportPaginationHelper(Country country, Integer totalAirports, Page<Airport> airportsPage) {
 		this.country = country;
+		this.totalAirports = totalAirports;
 		this.airportsPage = airportsPage;
 		country.setAirports(airportsPage.getContent());
 	}
@@ -29,6 +31,14 @@ public class AirportPaginationHelper {
 		this.country = country;
 	}
 	
+	public Integer getTotalAirports() {
+		return totalAirports;
+	}
+
+	public void setTotalAirports(Integer totalAirports) {
+		this.totalAirports = totalAirports;
+	}
+
 	public Page<Airport> getAirportsPage() {
 		return airportsPage;
 	}

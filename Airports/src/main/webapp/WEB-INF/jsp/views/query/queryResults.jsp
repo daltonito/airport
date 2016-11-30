@@ -14,8 +14,9 @@
 			<h1 class="page-title">Query</h1>
 		</header>
 		<div class="row">
-			<div class="col-md-3 col-sm-3">
+			<div class="col-md-12 col-sm-12">
 				<h3 class="thin text-center"><a class="pull-left" style="padding-bottom: 1em;" href="${country.wikipediaLink}">${country.name} (${country.code})</a></h3>
+				<h4 class="thin text-center"><a class="pull-right" style="padding-bottom: 0.3em;" href="<c:url value='<%=Requests.QUERY%>' />">Return to search</a></h4>
 			</div>
 		</div>
 		<div class="row">
@@ -23,6 +24,11 @@
 				<div class="col-md-12 col-sm-12">
 					<table class="table table-striped">
 						<thead style="background-color: #d0cdcd; opacity: 0.96;">
+							<tr>
+								<th colspan="11" style="background-color: #b9b6b6; font-size: 0.96em;">
+									Total number of airports found: ${totalAirports}
+								</th>
+							</tr>
 							<tr>
 								<th>NAME</th>
 								<th>IDENTIFIER</th>

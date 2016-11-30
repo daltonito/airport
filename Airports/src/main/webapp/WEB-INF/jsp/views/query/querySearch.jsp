@@ -43,3 +43,27 @@
 		</div>
 	</article>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#query_input").autocomplete({
+			minLength: 1,
+			source : function(request, response) {
+				$.ajax({
+					url : "<c:url value='<%=Requests.QUERY_AUTOCOMPLETE%>' />",
+					type : "POST",
+					dataType : "json",
+					data : { term : request.term },
+					success : function(data) {
+						response($.map(data, function(item) {
+							return {
+								label : item.name + " (" + item.code + ")",
+								value : item.name + " (" + item.code + ")"
+							};
+						}))
+
+					}
+				})
+			}			
+		});
+	})
+</script>

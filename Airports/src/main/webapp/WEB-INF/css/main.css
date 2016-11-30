@@ -119,3 +119,9 @@ img.pull-left { margin-right: 10px; }
   /* Opera 11.10+ */
   background: -o-linear-gradient(right, #2F2727, #1b7aae);
 }	
+
+.ui-autocomplete.ui-widget {
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 12px;
+}
+

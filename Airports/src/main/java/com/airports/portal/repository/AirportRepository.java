@@ -25,6 +25,14 @@ public interface AirportRepository extends BaseRepository<Airport, String>, Airp
 	List<Airport> findByIsoCountry(String countryName);
 	
 	/**
+	 * Returns the total number of airports for a given country code value.
+	 * 
+	 * @param countryName the input value for the country code
+	 * @return the number of airports that match the criteria
+	 */
+	Integer countByIsoCountry(String countryName);
+	
+	/**
 	 * Retrieves all airports for a given country code value.
 	 * 
 	 * @param countryName the input value for the country code

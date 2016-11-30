@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.airports.portal.model.Country;
 import com.airports.portal.model.support.AirportPaginationHelper;
+import com.airports.portal.model.support.CountrySuggestion;
 import com.airports.portal.model.support.RunwayTypesPaginationHelper;
 
 /**
@@ -60,5 +61,13 @@ public interface AirportService {
 	 * @return map with runway identifier/number of occurrences entries
 	 */
 	Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords);
+	
+	/**
+	 * Retrieves a list of country suggestions depending on the country text input.
+	 * 
+	 * @param countryInput the country text input
+	 * @return list of country suggestions that match the criteria
+	 */
+	List<CountrySuggestion> getCountrySuggestions(String countryInput);
 	
 }

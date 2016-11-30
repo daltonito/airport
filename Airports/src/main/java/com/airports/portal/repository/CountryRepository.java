@@ -1,5 +1,7 @@
 package com.airports.portal.repository;
 
+import java.util.List;
+
 import com.airports.portal.model.Country;
 import com.airports.portal.repository.core.BaseRepository;
 
@@ -35,7 +37,7 @@ public interface CountryRepository extends BaseRepository<Country, String> {
 	 * @param countryName the input value for the country code
 	 * @return all matching Country documents
 	 */
-	Country findByNameStartsWithIgnoreCase(String countryName);
+	List<Country> findByNameStartsWithIgnoreCase(String countryName);
 	
 	/**
 	 * Retrieves all countries for a given country name, 

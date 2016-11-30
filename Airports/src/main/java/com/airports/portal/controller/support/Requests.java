@@ -9,6 +9,8 @@ public final class Requests {
 	
 	public static final String QUERY = "/query";
 	
+	public static final String QUERY_AUTOCOMPLETE = QUERY + "/autocomplete";
+	
 	public static final String REPORTS = "/reports";
 	
 	public static final String REPORTS_NUMBER_OF_AIRPORTS = REPORTS + "/numberOfAirports";

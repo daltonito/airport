@@ -1,8 +1,12 @@
 package com.airports.portal.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -17,6 +21,7 @@ import com.airports.portal.model.Airport;
 import com.airports.portal.model.Country;
 import com.airports.portal.model.Runway;
 import com.airports.portal.model.support.AirportPaginationHelper;
+import com.airports.portal.model.support.CountrySuggestion;
 import com.airports.portal.model.support.RunwayTypesPaginationHelper;
 import com.airports.portal.repository.AirportRepository;
 import com.airports.portal.repository.CountryRepository;
@@ -55,10 +60,21 @@ public class AirportServiceImpl implements AirportService {
 		
 		Country country = null;
 		
-		if (countryInput.length() >= 2) {
-
+		if (countryInput.length() == 2) {
 			// search by country code
 			country = countryRepository.findByCodeIgnoreCase(countryInput);
+		}
+		
+		if (countryInput.length() >= 2) {
+			
+			// country value selected via auto complete, extract the country code
+			Matcher m = Pattern.compile("\\((.*?)\\)").matcher(countryInput);
+			
+			while(m.find()) {
+				if (m.group(1).length() == 2) {
+					country = countryRepository.findByCodeIgnoreCase(m.group(1));
+				}
+			}
 			
 			// search for the exact country name
 			if (country == null) {
@@ -67,7 +83,8 @@ public class AirportServiceImpl implements AirportService {
 			
 			// search for the country name that begins with the input string
 			if (country == null) {
-				country = countryRepository.findByNameStartsWithIgnoreCase(countryInput);
+				List<Country> countryResults = countryRepository.findByNameStartsWithIgnoreCase(countryInput);
+				country = countryResults != null && !countryResults.isEmpty() ? countryResults.get(0) : null;
 			}
 			
 			// search for the country name that contains the input string
@@ -83,6 +100,8 @@ public class AirportServiceImpl implements AirportService {
 
 		PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
 		Page<Airport> airportsPage = airportRepository.findByIsoCountry(country.getCode(), request);
+		
+		Integer totalAirports = airportRepository.countByIsoCountry(country.getCode());
     	
     	for (Airport airport : airportsPage) {
     		
@@ -91,7 +110,7 @@ public class AirportServiceImpl implements AirportService {
     		airport.setRunways(airportRunways);
     	}
     	
-    	return new AirportPaginationHelper(country, airportsPage);
+    	return new AirportPaginationHelper(country, totalAirports, airportsPage);
     }
 	
 	/* (non-Javadoc)
@@ -153,6 +172,36 @@ public class AirportServiceImpl implements AirportService {
 	@Override
 	public Map<String, Integer> getMostCommonRunwayIdents(Integer numberOfRecords) {
 		return runwayRepository.getMostCommonRunwayIdents(numberOfRecords);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.airports.portal.service.AirportService#getCountrySuggestions(java.lang.String)
+	 */
+	@Override
+	public List<CountrySuggestion> getCountrySuggestions(String countryInput) {
+		
+		Map<String, CountrySuggestion> filterMap = new HashMap<String, CountrySuggestion>();
+    	List<CountrySuggestion> list = new ArrayList<CountrySuggestion>();
+
+    	if (countryInput != null && countryInput.trim().length() >= 2) {
+    		
+    		if (countryInput.length() == 2) {
+	    		CountrySuggestion countrySuggestion = new CountrySuggestion(countryRepository.findByCodeIgnoreCase(countryInput));
+	    		filterMap.put(countrySuggestion.getCode(), countrySuggestion);
+	    		list.add(countrySuggestion);
+    		}
+    		
+			List<Country> countries = countryRepository.findByNameStartsWithIgnoreCase(countryInput);
+			
+			for (Country country : countries) {
+				
+				if (filterMap.get(country.getCode()) == null) {
+					list.add(new CountrySuggestion(country));
+				}
+			}
+    	}
+    	
+		return list;
 	}
 
 }
