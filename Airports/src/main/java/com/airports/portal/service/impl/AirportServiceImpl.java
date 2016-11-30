@@ -55,20 +55,22 @@ public class AirportServiceImpl implements AirportService {
 		
 		Country country = null;
 		
-		// search by country code if the input string is with length 2
-		if (countryInput.length() == 2) {
+		if (countryInput.length() >= 2) {
+
+			// search by country code
 			country = countryRepository.findByCodeIgnoreCase(countryInput);
 			
-			// search for the exact country name if length is more than 2
-		} else if (countryInput.length() > 2) {
-			country = countryRepository.findByNameIgnoreCase(countryInput);
+			// search for the exact country name
+			if (country == null) {
+				country = countryRepository.findByNameIgnoreCase(countryInput);
+			}
 			
 			// search for the country name that begins with the input string
 			if (country == null) {
 				country = countryRepository.findByNameStartsWithIgnoreCase(countryInput);
 			}
 			
-			// search for the country name that is contains the input string
+			// search for the country name that contains the input string
 			if (country == null) {
 				country = countryRepository.findByNameLikeIgnoreCase(countryInput);
 			}

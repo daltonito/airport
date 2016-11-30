@@ -32,8 +32,7 @@ public class AirportsController extends BaseController {
     @RequestMapping(value = Requests.QUERY, method = RequestMethod.GET)
     public String handleQueryRequest(Model model) {
     	LOGGER.debug("Query search view requested");
-    	model.addAttribute("search_action", true);
-    	return Views.QUERY_VIEW.name();
+    	return Views.QUERY_SEARCH_VIEW.name();
     }
     
     @RequestMapping(value = Requests.QUERY, method = RequestMethod.POST, params = "query_submit")
@@ -41,34 +40,34 @@ public class AirportsController extends BaseController {
     	
     	if (queryInput != null && queryInput.trim().length() > 1) {
     		LOGGER.debug("Entered input is " + queryInput);
-    		searchedQueryPage(queryInput, null, model);
+    		return searchedQueryPage(queryInput, null, model);
+    		
     	} else {
         	LOGGER.debug("Invalid user input, returning action to the query search screen");
-        	model.addAttribute("search_action", true);
         	model.addAttribute("error_action", true);
+        	return Views.QUERY_SEARCH_VIEW.name();
     	}
-
-        return Views.QUERY_VIEW.name();
     }
     
     @RequestMapping(value = Requests.QUERY, method = RequestMethod.POST, params = "pageNumber")
     public String getSearchedQueryPage(@RequestParam("query_input") String queryInput, @RequestParam("pageNumber") Integer pageNumber, Model model) {
     	searchedQueryPage(queryInput, pageNumber, model);
-        return Views.QUERY_VIEW.name();
+        return Views.QUERY_RESULTS_VIEW.name();
     }
     
-    private void searchedQueryPage(String queryInput, Integer pageNumber, Model model) {
+    private String searchedQueryPage(String queryInput, Integer pageNumber, Model model) {
     	
     	AirportPaginationHelper page = airportService.getAirportsAndRunwaysByCountry(queryInput, pageNumber == null ? 1 : pageNumber);
     	
     	if (page != null) {
 	        setPaginationParameters(page.getAirportsPage(), model);
 	        model.addAttribute("country", page.getCountry());
-	    	model.addAttribute("result_action", true);
+	    	return Views.QUERY_RESULTS_VIEW.name();
+	    	
     	} else {
     		LOGGER.debug("Airports not found for country input " + queryInput);
-        	model.addAttribute("search_action", true);
         	model.addAttribute("error_action", true);
+        	return Views.QUERY_SEARCH_VIEW.name();
     	}
     }
  

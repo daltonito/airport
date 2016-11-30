@@ -27,10 +27,15 @@
 	</definition>
 	
 	<!-- Query view -->
-	<definition name="QUERY_VIEW" extends="defaultLayout">
-		<put-attribute name="title" value="Query" />
-		<put-attribute name="body" value="/WEB-INF/jsp/views/query/query.jsp" />
+	<definition name="QUERY_SEARCH_VIEW" extends="defaultLayout">
+		<put-attribute name="title" value="Query Search" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/query/querySearch.jsp" />
 	</definition>
+	
+	<definition name="QUERY_RESULTS_VIEW" extends="defaultLayout">
+		<put-attribute name="title" value="Query Results" />
+		<put-attribute name="body" value="/WEB-INF/jsp/views/query/queryResults.jsp" />
+	</definition>	
 	
 	<!-- Reports view -->
 	<definition name="REPORTS_NUMBER_OF_AIRPORTS_VIEW" extends="defaultLayout">
