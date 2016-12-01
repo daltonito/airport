@@ -186,17 +186,25 @@ public class AirportServiceImpl implements AirportService {
     	if (countryInput != null && countryInput.trim().length() >= 2) {
     		
     		if (countryInput.length() == 2) {
-	    		CountrySuggestion countrySuggestion = new CountrySuggestion(countryRepository.findByCodeIgnoreCase(countryInput));
-	    		filterMap.put(countrySuggestion.getCode(), countrySuggestion);
-	    		list.add(countrySuggestion);
+    			
+    			Country country = countryRepository.findByCodeIgnoreCase(countryInput);
+    			
+    			if (country != null) {
+		    		CountrySuggestion countrySuggestion = new CountrySuggestion(country);
+		    		filterMap.put(countrySuggestion.getCode(), countrySuggestion);
+		    		list.add(countrySuggestion);
+    			}
     		}
     		
 			List<Country> countries = countryRepository.findByNameStartsWithIgnoreCase(countryInput);
 			
-			for (Country country : countries) {
+			if (countries != null && !countries.isEmpty()) {
 				
-				if (filterMap.get(country.getCode()) == null) {
-					list.add(new CountrySuggestion(country));
+				for (Country country : countries) {
+					
+					if (filterMap.get(country.getCode()) == null) {
+						list.add(new CountrySuggestion(country));
+					}
 				}
 			}
     	}
