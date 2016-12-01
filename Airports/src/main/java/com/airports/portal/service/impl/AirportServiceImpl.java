@@ -179,12 +179,12 @@ public class AirportServiceImpl implements AirportService {
 	 */
 	@Override
 	public List<CountrySuggestion> getCountrySuggestions(String countryInput) {
-		
-		Map<String, CountrySuggestion> filterMap = new HashMap<String, CountrySuggestion>();
-    	List<CountrySuggestion> list = new ArrayList<CountrySuggestion>();
 
     	if (countryInput != null && countryInput.trim().length() >= 2) {
     		
+    		Map<String, CountrySuggestion> filterMap = new HashMap<String, CountrySuggestion>();
+    		List<CountrySuggestion> list = new ArrayList<CountrySuggestion>();
+
     		if (countryInput.length() == 2) {
     			
     			Country country = countryRepository.findByCodeIgnoreCase(countryInput);
@@ -207,9 +207,11 @@ public class AirportServiceImpl implements AirportService {
 					}
 				}
 			}
+			
+			return list;
     	}
     	
-		return list;
+		return null;
 	}
 
 }

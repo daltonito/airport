@@ -17,48 +17,50 @@
 				<h4 class="modal-title">${airport.name} Runways</h4>
 			</div>
 			<div class="modal-body">
-				<table class="table table-bordered">
-					<thead style="background-color: #d0cdcd; opacity: 0.96;">
-						<tr>
-							<th>IDENTIFIER</th>
-							<th>LENGTH (FT)</th>
-							<th>WIDTH (FT)</th>
-							<th>SURFACE</th>
-							<th>LIGHTED</th>
-							<th>CLOSED</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${airport.runways}" var="runway">
+				<div class="table-responsive"> 
+					<table class="table table-bordered">
+						<thead style="background-color: #d0cdcd; opacity: 0.96;">
 							<tr>
-								<td style="font-weight: bold;">${runway.leIdent}</td>
-								<td>${runway.lengthFt}</td>
-								<td>${runway.widthFt}</td>
-								<td>${runway.surface}</td>
-								<td>
-									<c:if test="${not empty runway.lighted}">
-										<c:if test="${runway.lighted eq 1}">
-											yes
-										</c:if>
-										<c:if test="${runway.lighted eq 0}">
-											no
-										</c:if>
-									</c:if>																				
-								</td>
-								<td>
-									<c:if test="${not empty runway.closed}">
-										<c:if test="${runway.closed eq 1}">
-											yes
-										</c:if>
-										<c:if test="${runway.closed eq 0}">
-											no
-										</c:if>
-									</c:if>																					
-								</td>																					
+								<th>IDENTIFIER</th>
+								<th>LENGTH (FT)</th>
+								<th>WIDTH (FT)</th>
+								<th>SURFACE</th>
+								<th>LIGHTED</th>
+								<th>CLOSED</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>																	
+						</thead>
+						<tbody>
+							<c:forEach items="${airport.runways}" var="runway">
+								<tr>
+									<td style="font-weight: bold;">${runway.leIdent}</td>
+									<td>${runway.lengthFt}</td>
+									<td>${runway.widthFt}</td>
+									<td>${runway.surface}</td>
+									<td>
+										<c:if test="${not empty runway.lighted}">
+											<c:if test="${runway.lighted eq 1}">
+												yes
+											</c:if>
+											<c:if test="${runway.lighted eq 0}">
+												no
+											</c:if>
+										</c:if>																				
+									</td>
+									<td>
+										<c:if test="${not empty runway.closed}">
+											<c:if test="${runway.closed eq 1}">
+												yes
+											</c:if>
+											<c:if test="${runway.closed eq 0}">
+												no
+											</c:if>
+										</c:if>																					
+									</td>																					
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>																	
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
