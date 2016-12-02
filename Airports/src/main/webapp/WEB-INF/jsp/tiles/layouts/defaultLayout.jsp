@@ -50,6 +50,7 @@
 		<div class="container">
 			<tiles:insertAttribute name="body" />
 		</div>
+		<div style="height: 12%;"></div>
 		<footer id="footer" class="footer">
 			<tiles:insertAttribute name="footer" />
 		</footer>
